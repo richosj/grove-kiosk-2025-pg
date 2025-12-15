@@ -1,0 +1,184 @@
+// utils 먼저 로드 (변수, 믹스인, 함수)
+@use 'utils/functions';
+@use 'utils/mixins';
+@use 'utils/variables';
+
+// base 스타일 (reset 등)
+@use 'base/reset';
+@use 'base/swiper-bundle.min.css';
+
+.kiosk {
+  position: relative;
+  width: 2339px;
+  height: 1654px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.controls{
+  
+}
+.controls{
+  position: absolute;
+  bottom: 56px;
+  left: 67px;
+  right: 67px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  border-top:4px solid #fff;
+  padding-top: 30px;
+  padding-left: 55px;
+  padding-right: 55px;
+  button{
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 67px;
+    height: 67px;
+    font-size: 0;
+  }
+  .btn-group{
+    display: flex;
+    gap: 10px;
+  }
+  .btn-prev{
+    background-image: url('/img/prev-white.png');
+  }
+  .btn-next{
+    background-image: url('/img/next-white.png');
+  }
+  .btn-home{
+    background-image: url('/img/home-white.png');
+  }
+  .btn-menu{
+    background-image: url('/img/menu-white.png');
+  }
+}
+
+.page1{
+  .controls{
+    .btn-prev{
+      background-image: url('/img/prev.png');
+    }
+    .btn-next{
+      background-image: url('/img/next.png');
+    }
+    .btn-home{
+      background-image: url('/img/home.png');
+    }
+    .btn-menu{
+      background-image: url('/img/menu.png');
+    }
+  }
+}
+
+.swiper-container{
+  width: 2339px;
+  height: 1654px;
+  order:1;
+  overflow: hidden;
+  background:#fff;
+  &:has(.slide1.swiper-slide-active){
+    overflow: visible;
+  }
+}
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(3840px * 1.5);
+  height: calc(3840px * 1.5);
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+@keyframes expandCircle {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+.popup{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  .popup-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-30px);
+    opacity: 0;
+    
+    z-index: 2;
+    position: relative;
+  }
+  &.show{
+    transition: all 0s ease-in-out;
+    z-index: 10000;
+    opacity: 1;
+    visibility: visible;
+    .overlay{
+      animation: expandCircle 0.75s ease-out forwards;
+    }
+    .popup-content{
+      transition: all 0.3s 0.75s ease-in-out;
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+}
+
+.btn-close {
+  position: absolute;
+  top:520px;
+  right: 220px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+
+
+.swiper-slide *{
+  will-change: auto;
+}
+
+.page-inner{
+
+}
+
+.popup-content-inner{
+  position: relative;
+}
+.btn-close{
+  top: 30px;
+  right: 50px;
+  width: 50px;
+  height: 50px;
+  font-size: 0;
+}
+.btn-move{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  font-size: 0;
+  background-color: #000;
+}
+.popup1{
+  .btn-move1{}
+}
